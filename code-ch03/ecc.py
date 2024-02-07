@@ -381,6 +381,7 @@ class S256Point(Point):
     # end::source8[]
 
     # tag::source12[]
+    # Add explanation for why coefficient arithmetic is done mod N instead of mod P. Include group theory proofs.
     def verify(self, z, sig):
         s_inv = pow(sig.s, N-2, N) # <1>
         u = z * s_inv % N # <2>
