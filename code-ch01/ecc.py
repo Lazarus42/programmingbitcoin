@@ -23,7 +23,7 @@ class FieldElement:
 
     def __ne__(self, other):
         # this should be the inverse of the == operator
-        raise NotImplementedError
+        return not (self == other)
 
     # tag::source2[]
     def __add__(self, other):
@@ -39,7 +39,7 @@ class FieldElement:
         # self.num and other.num are the actual values
         # self.prime is what we need to mod against
         # We return an element of the same class
-        raise NotImplementedError
+        return self.__class__((self.num - other.num) % self.prime, self.prime)
 
     def __mul__(self, other):
         if self.prime != other.prime:
@@ -47,8 +47,8 @@ class FieldElement:
         # self.num and other.num are the actual values
         # self.prime is what we need to mod against
         # We return an element of the same class
-        raise NotImplementedError
-
+        return self.__class__((self.num * other.num) % self.prime, self.prime)\
+        
     # tag::source3[]
     def __pow__(self, exponent):
         n = exponent % (self.prime - 1)  # <1>
@@ -64,7 +64,7 @@ class FieldElement:
         # this means:
         # 1/n == pow(n, p-2, p)
         # We return an element of the same class
-        raise NotImplementedError
+        return self.__class__((self.num * pow(other.num, other.prime - 2, other.prime) % self.prime), self.prime)
 
 
 class FieldElementTest(TestCase):
