@@ -382,11 +382,12 @@ class S256Point(Point):
 
     # tag::source12[]
     def verify(self, z, sig):
-        s_inv = pow(sig.s, N - 2, N)  # <1>
-        u = z * s_inv % N  # <2>
-        v = sig.r * s_inv % N  # <3>
-        total = u * G + v * self  # <4>
-        return total.x.num == sig.r  # <5>
+        s_inv = pow(sig.s, N-2, N) # <1>
+        u = z * s_inv % N # <2>
+        v = v * s_inv % N # <3>
+        R = u*G + v*self # <4>
+        return R.x.num == sig.r # <5>
+
     # end::source12[]
 
 
